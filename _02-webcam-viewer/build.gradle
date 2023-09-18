@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'net.jw'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class' : 'net.test.Main'
+    }
+//    from {
+//        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.openpnp/opencv
+    implementation 'org.openpnp:opencv:4.7.0-0'
+
+    implementation 'com.google.guava:guava:32.1.1-jre'
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+application {
+    mainClass = 'net.test.Main'
+
+    def opencvPath = "${rootDir}\\lib\\opencv\\x64"
+    applicationDefaultJvmArgs = ['-Djava.library.path="' + opencvPath + '"']
+}
+
+test {
+    useJUnitPlatform()
+}

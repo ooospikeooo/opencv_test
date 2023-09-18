@@ -1,0 +1,4 @@
+rootProject.name = 'opencv_test'
+include '_01-load-image'
+include '_02-webcam-viewer'
+
